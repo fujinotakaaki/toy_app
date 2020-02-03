@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @user.name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @user.email %>
+</p>
+
+<p>
+  <strong>Contents:（現在<%= @microposts.count %>件投稿）</strong><br>
+  <% @microposts.each_with_index do |micropost, idx| %>
+  <%= idx + 1%>: <%= micropost.content %><br>
+  <% end %>
+</p>
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>
