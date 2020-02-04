@@ -11,11 +11,20 @@
 </p>
 
 <p>
-  <strong>Contents:（現在<%= @microposts.count %>件投稿）</strong><br>
+  <strong>Contents:（現在<%= format( "%0#{@digit}d", @microposts.count) %>件投稿）</strong><br>
   <% @microposts.each_with_index do |micropost, idx| %>
-  <%= idx + 1%>: <%= micropost.content %><br>
+  <%= format( "%0#{@digit}d", idx + 1)%>: <%= micropost.content %><br>
   <% end %>
 </p>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
+
+
+<br><br>
+<%= form_with(model: @user_new, local: true) do |form| %>
+<% arr = [('a'..'z'), ('A'..'Z'),('0'..'9')].map(&:to_a).flatten %>
+<%= form.hidden_field :name, :value => (0..9).map{arr[rand(62)]}.join %>
+<%= form.hidden_field :email, :value => (0..9).map{arr[rand(62)]}.join + "@" + (0..9).map{arr[rand(62)]}.join + ".com" %>
+<%= form.submit '適当なユーザーを作成' %>
+<% end %>

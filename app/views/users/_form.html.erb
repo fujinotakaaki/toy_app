@@ -25,3 +25,9 @@
     <%= form.submit %>
   </div>
 <% end %>
+<%= form_with(model: user, local: true) do |form| %>
+<% arr = [('a'..'z'), ('A'..'Z'),('0'..'9')].map(&:to_a).flatten %>
+<%= form.hidden_field :name, :value => (0..9).map{arr[rand(62)]}.join %>
+<%= form.hidden_field :email, :value => (0..9).map{arr[rand(62)]}.join + "@" + (0..9).map{arr[rand(62)]}.join + ".com" %>
+<%= form.submit '適当なユーザーを作成' %>
+<% end %>

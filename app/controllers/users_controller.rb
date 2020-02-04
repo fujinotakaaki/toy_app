@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
+    @user = User.new
     @users = User.all
   end
 
@@ -11,6 +12,8 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @microposts = @user.microposts
+    @digit = ( @microposts.count != 0 ? 1 + Math.log10(@microposts.count).floor : 1 )
+    @user_new = User.new
   end
 
   # GET /users/new
@@ -20,6 +23,7 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    @user_new = User.new
   end
 
   # POST /users

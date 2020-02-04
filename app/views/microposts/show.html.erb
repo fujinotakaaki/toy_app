@@ -12,3 +12,12 @@
 
 <%= link_to 'Edit', edit_micropost_path(@micropost) %> |
 <%= link_to 'Back', microposts_path %>
+
+<br><br>
+<%= form_with(model: @micropost_new, local: true) do |micropost| %>
+<% arr = [('a'..'z'), ('A'..'Z'),('0'..'9')].map(&:to_a).flatten %>
+<!--100文字の文字列作成-->
+<%= micropost.hidden_field :content, :value => (0..99).map{arr[rand(62)]}.join %>
+<%= micropost.hidden_field :user_id, :value => (1 + rand(@member_count)) %>
+<%= micropost.submit '適当な投稿を作成' %>
+<% end %>
